@@ -1,3 +1,30 @@
+/*
+Esta es la versión con menú del programa. 
+Documentación: 
+Esta conformado por las clases: 
+    - CProducto: Clase base que representa un producto genérico en el inventario. 
+    - CComida: Hereda de CProducto, representa productos de tipo comida y maneja la fecha de vencimiento. 
+    - CElectronico: Hereda de CProducto, representa productos electrónicos y maneja características específicas como la garantía y la marca. 
+    - CRopa: Hereda de CProducto, representa productos de ropa y maneja características específicas como la talla y el material. 
+    - CInventario: Plantilla de clase que maneja la gestión del inventario de productos, permitiendo agregar, eliminar, listar, y realizar 
+      diversas operaciones sobre los productos. 
+El programa permite las siguientes operaciones: 
+    1. Mostrar inventario: Lista todos los productos actuales en el inventario. 
+    2. Ordenar por precio: Ordena los productos en el inventario por su precio en orden ascendente. 
+    3. Ordenar por nombre: Ordena los productos en el inventario por su nombre en orden ascendente. 
+    4. Buscar producto por nombre: Busca productos en el inventario por su nombre. 
+    5. Buscar producto por código: Busca productos en el inventario por su código. 
+    6. Buscar producto por categoría: Busca productos en el inventario por su categoría. 
+    7. Productos próximos a vencer: Muestra los productos que están próximos a vencer (menos de 7 días). 
+    8. Productos más vendidos: Muestra los 3 productos más vendidos del inventario. 
+    9. Salir: Finaliza el programa. 
+Uso: 
+    1. Ejecute el programa. 
+    2. Se mostrará un menú con las opciones disponibles. 
+    3. Ingrese el número de la opción deseada y presione Enter. 
+    4. Siga las instrucciones en pantalla para cada opción. 
+    5. Para salir del programa, seleccione la opción 9. 
+*/
 #include <iostream>
 #include <vector>
 #include <string>

@@ -125,4 +125,4 @@ public:
     }
 };
 
-#endif // GESTION_INVENTARIO_PRODUCT
+#endif // GESTION_INVENTARIO_PRODUCTO

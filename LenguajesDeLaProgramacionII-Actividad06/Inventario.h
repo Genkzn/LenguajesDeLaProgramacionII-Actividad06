@@ -87,116 +87,121 @@ public:
             cout << "Producto no encontrado." << endl;
         }
     }
-
-    void InvModSM(const string& cod, int cc) {//modificar el stock mediante codigo, donde cc es la cantidad de productos que el usuario quiere adquirir
-        bool encontrado = false;
-        for (auto& producto : pro) {
-            if (producto->getCodigo() == cod) {
-                encontrado = true;
+    void InvModSM(const string& cod, int cc) {
+        bool encontrado = false; // Variable para indicar si el producto fue encontrado
+        for (auto& producto : pro) { // Iterar sobre cada producto en el vector 'pro'
+            if (producto->getCodigo() == cod) { // Si el código del producto coincide con el código buscado
+                encontrado = true; // Producto encontrado
                 producto->ProVenta(cc); // Intenta vender la cantidad especificada
                 break; // Una vez encontrado y procesado, salimos del bucle
             }
         }
-        if (!encontrado) {
-            cout << "Producto no encontrado." << endl;
+        if (!encontrado) { // Si no se encontró el producto
+            cout << "Producto no encontrado." << endl; // Imprimir mensaje de error
         }
     }
 
     vector<x*> InvBusN(const std::string& nm) const {
-        std::vector<x*> n;
-        bool found = false;
-        for (const auto& producto : pro) {
-            if (producto->getNombre() == nm) {
-                n.push_back(producto);
-                found = true;
+        std::vector<x*> n; // Vector para almacenar productos que coinciden con el nombre
+        bool found = false; // Variable para indicar si se encontraron productos
+        for (const auto& producto : pro) { // Iterar sobre cada producto en el vector 'pro'
+            if (producto->getNombre() == nm) { // Si el nombre del producto coincide con el nombre buscado
+                n.push_back(producto); // Añadir producto al vector
+                found = true; // Producto encontrado
             }
         }
-        if (!found) {
-            cout << "No encontrado." << endl;
+        if (!found) { // Si no se encontró ningún producto
+            cout << "No encontrado." << endl; // Imprimir mensaje de error
         }
-        return n;
+        return n; // Devolver vector de productos encontrados
     }
 
+
     vector<x*> InvBusCB(const string& co) const {
-        vector<x*> b;
-        bool found = false;
-        for (const auto& producto : pro) {
-            if (producto->getCodigo() == co) {
-                b.push_back(producto);
-                found = true;
+        vector<x*> b; // Vector para almacenar productos que coinciden con el código
+        bool found = false; // Variable para indicar si se encontraron productos
+        for (const auto& producto : pro) { // Iterar sobre cada producto en el vector 'pro'
+            if (producto->getCodigo() == co) { // Si el código del producto coincide con el código buscado
+                b.push_back(producto); // Añadir producto al vector
+                found = true; // Producto encontrado
             }
         }
-        if (!found) {
-            cout << "No encontrado." << endl;
+        if (!found) { // Si no se encontró ningún producto
+            cout << "No encontrado." << endl; // Imprimir mensaje de error
         }
-        return b;
+        return b; // Devolver vector de productos encontrados
     }
 
     vector<x*> InvBusC(const string& ct) const {
-        vector<x*> c;
-        bool found = false;
-        for (const auto& producto : pro) {
-            if (producto->getCategoria() == ct) {
-                c.push_back(producto);
-                found = true;
+        vector<x*> c; // Vector para almacenar productos que coinciden con la categoría
+        bool found = false; // Variable para indicar si se encontraron productos
+        for (const auto& producto : pro) { // Iterar sobre cada producto en el vector 'pro'
+            if (producto->getCategoria() == ct) { // Si la categoría del producto coincide con la categoría buscada
+                c.push_back(producto); // Añadir producto al vector
+                found = true; // Producto encontrado
             }
         }
-        if (!found) {
-            cout << "No encontrado." << endl;
+        if (!found) { // Si no se encontró ningún producto
+            cout << "No encontrado." << endl; // Imprimir mensaje de error
         }
-        return c;
+        return c; // Devolver vector de productos encontrados
     }
+
 
     vector<x*> InvProV(const string& ct) const {
-        vector<x*> c;
-        bool found = false;
-        for (const auto& producto : pro) {
-            if (producto->getCategoria() == ct) {
-                c.push_back(producto);
-                found = true;
+        vector<x*> c; // Vector para almacenar productos que coinciden con la categoría
+        bool found = false; // Variable para indicar si se encontraron productos
+        for (const auto& producto : pro) { // Iterar sobre cada producto en el vector 'pro'
+            if (producto->getCategoria() == ct) { // Si la categoría del producto coincide con la categoría buscada
+                c.push_back(producto); // Añadir producto al vector
+                found = true; // Producto encontrado
             }
         }
-        if (!found) {
-            cout << "No encontrado." << endl;
+        if (!found) { // Si no se encontró ningún producto
+            cout << "No encontrado." << endl; // Imprimir mensaje de error
         }
-        return c;
+        return c; // Devolver vector de productos encontrados
     }
-    void InvPrV() const { // Productos pr�ximos a vencer
-        time_t ahora;
-        time(&ahora);
 
-        tm fechaAhora;
-        localtime_s(&fechaAhora, &ahora);
 
-        for (const auto& producto : pro) {
-            CComida* comida = dynamic_cast<CComida*>(producto);
-            if (comida) {
-                tm fv = comida->getFechaVencimiento();
-                time_t fechav = mktime(&fv);
+    void InvPrV() const {
+        time_t ahora; // Variable para almacenar el tiempo actual
+        time(&ahora); // Obtener el tiempo actual
 
-                double ds = difftime(fechav, ahora);
-                int dv = static_cast<int>(ds / (60 * 60 * 24)); // Convertir segundos a d�as
-                if (dv < 7 and dv>0) {
-                    cout << "El producto '" << comida->getNombre() << "' vence enmenos de 7 dias." << endl;
+        tm fechaAhora; // Estructura para almacenar la fecha y hora actual
+        localtime_s(&fechaAhora, &ahora); // Convertir 'ahora' a estructura 'tm'
+
+        for (const auto& producto : pro) { // Iterar sobre cada producto en el vector 'pro'
+            CComida* comida = dynamic_cast<CComida*>(producto); // Intentar convertir el producto a tipo 'CComida'
+            if (comida) { // Si la conversión fue exitosa
+                tm fv = comida->getFechaVencimiento(); // Obtener la fecha de vencimiento del producto
+                time_t fechav = mktime(&fv); // Convertir la fecha de vencimiento a 'time_t'
+
+                double ds = difftime(fechav, ahora); // Calcular la diferencia en segundos entre la fecha de vencimiento y la fecha actual
+                int dv = static_cast<int>(ds / (60 * 60 * 24)); // Convertir la diferencia de segundos a días
+                if (dv < 7 && dv > 0) { // Si el producto vence en menos de 7 días
+                    cout << "El producto '" << comida->getNombre() << "' vence en menos de 7 días." << endl; // Imprimir mensaje de advertencia
                 }
             }
         }
     }
-    void InvMV() const { //imprime los 3 productos mas vendidos
-        vector<CProducto*> cop = pro;
-        sort(cop.begin(), cop.end(),
+
+    
+    void InvMV() const {
+        vector<CProducto*> cop = pro; // Crear una copia del vector de productos
+        sort(cop.begin(), cop.end(), // Ordenar los productos por cantidad vendida
             [](CProducto* a, CProducto* b) {
-                return a->getProductosVendidos() > b->getProductosVendidos();
+                return a->getProductosVendidos() > b->getProductosVendidos(); // Comparar productos por cantidad vendida
             });
-        cout << "Productos mas vendidos:" << endl;
-        for (int i = 0; i < min(3, static_cast<int>(cop.size())); ++i) {
-            cout << cop[i]->getNombre() << " - Cantidad vendida: " << cop[i]->getProductosVendidos() << endl;
+        cout << "Productos más vendidos:" << endl;
+        for (int i = 0; i < min(3, static_cast<int>(cop.size())); ++i) { // Iterar sobre los 3 primeros productos o el total si es menor a 3
+            cout << cop[i]->getNombre() << " - Cantidad vendida: " << cop[i]->getProductosVendidos() << endl; // Imprimir nombre y cantidad vendida del producto
         }
     }
 
     template<typename R>
-    void InvOrdenar(R comp) { //Ordena por campo
-        sort(pro.begin(), pro.end(), comp);
+    void InvOrdenar(R comp) {
+        sort(pro.begin(), pro.end(), comp); // Ordenar el vector de productos usando el comparador 'comp'
     }
 
 };
